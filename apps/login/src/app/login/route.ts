@@ -76,15 +76,22 @@ export async function GET(request: NextRequest) {
   const { serviceUrl } = getServiceUrlFromHeaders(_headers);
 
   const searchParams = request.nextUrl.searchParams;
+  const authRequest = searchParams.get("authRequest");
 
-  const oidcRequestId = searchParams.get("authRequest"); // oidc initiated request
+  // If we have an authRequest, redirect to /loginname with the requestId parameter
+  if (authRequest) {
+    const loginNameUrl = constructUrl(request, "/loginname");
+    loginNameUrl.searchParams.set("requestId", `oidc_${authRequest}`);
+    return NextResponse.redirect(loginNameUrl);
+  }
+
   const samlRequestId = searchParams.get("samlRequest"); // saml initiated request
 
   // internal request id which combines authRequest and samlRequest with the prefix oidc_ or saml_
   let requestId =
     searchParams.get("requestId") ??
-    (oidcRequestId
-      ? `oidc_${oidcRequestId}`
+    (authRequest
+      ? `oidc_${authRequest}`
       : samlRequestId
         ? `saml_${samlRequestId}`
         : undefined);
