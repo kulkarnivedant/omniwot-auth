@@ -42,7 +42,7 @@ export async function skipMFAAndContinueWithNextUrl({
     organization: organization,
   });
 
-  // await humanMFAInitSkipped({ serviceUrl, userId });
+  await humanMFAInitSkipped({ serviceUrl, userId });
 
   const url =
     requestId && sessionId
