@@ -65,8 +65,6 @@ async function loadSessions({
     ids: ids.filter((id: string | undefined) => !!id),
   });
 
-  console.log("loadSessions", response);
-
   return response?.sessions ?? [];
 }
 
@@ -74,16 +72,10 @@ const ORG_SCOPE_REGEX = /urn:zitadel:iam:org:id:([0-9]+)/;
 const ORG_DOMAIN_SCOPE_REGEX = /urn:zitadel:iam:org:domain:primary:(.+)/; // TODO: check regex for all domain character options
 const IDP_SCOPE_REGEX = /urn:zitadel:iam:org:idp:id:(.+)/;
 
-console.log("ORG_SCOPE_REGEX", ORG_SCOPE_REGEX);
-console.log("ORG_DOMAIN_SCOPE_REGEX", ORG_DOMAIN_SCOPE_REGEX);
-console.log("IDP_SCOPE_REGEX", IDP_SCOPE_REGEX);
-
 export async function GET(request: NextRequest) {
   console.log("GET");
   const _headers = await headers();
   const { serviceUrl } = getServiceUrlFromHeaders(_headers);
-
-  console.log("serviceUrl", serviceUrl);
 
   const searchParams = request.nextUrl.searchParams;
 
@@ -102,6 +94,10 @@ export async function GET(request: NextRequest) {
   console.log("Final requestId:", requestId);
 
   const sessionId = searchParams.get("sessionId");
+
+  // print route
+  console.log("Request URL:", request.url);
+  console.log("Request Params:", searchParams.toString());
 
   // TODO: find a better way to handle _rsc (react server components) requests and block them to avoid conflicts when creating oidc callback
   const _rsc = searchParams.get("_rsc");

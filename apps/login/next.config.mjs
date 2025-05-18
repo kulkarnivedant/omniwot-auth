@@ -1,4 +1,4 @@
-import createNextIntlPlugin from "next-intl/plugin";a
+import createNextIntlPlugin from "next-intl/plugin";
 import { setupDevPlatform } from '@cloudflare/next-on-pages/next-dev';
 import { DEFAULT_CSP } from "./constants/csp.js";
 
