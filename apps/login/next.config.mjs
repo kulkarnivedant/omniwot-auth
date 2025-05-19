@@ -68,8 +68,8 @@ const nextConfig = {
     dynamicIO: true,
   },
   images: {
-    unoptimized: true,
-    // remotePatterns: imageRemotePatterns,
+    // unoptimized: true,
+    remotePatterns: imageRemotePatterns,
   },
   async headers() {
     return [

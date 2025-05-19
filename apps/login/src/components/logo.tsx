@@ -18,6 +18,7 @@ export function Logo({ lightSrc, darkSrc, height = 40, width = 147.5 }: Props) {
             src={darkSrc}
             alt="logo"
             priority={true}
+            style={{ width: 'auto', height: 'auto' }}
           />
         </div>
       )}
@@ -29,6 +30,7 @@ export function Logo({ lightSrc, darkSrc, height = 40, width = 147.5 }: Props) {
             priority={true}
             src={lightSrc}
             alt="logo"
+            style={{ width: 'auto', height: 'auto' }}
           />
         </div>
       )}
