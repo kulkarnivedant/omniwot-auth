@@ -52,24 +52,11 @@ const imageRemotePatterns = [
   {
     protocol: "https",
     hostname: "dev.zitadel.golain.io",
-    port: "443",
+    port: "",
     pathname: "/**",
   }
 ];
 
-if (process.env.ZITADEL_API_URL) {
-  const hostname = process.env.ZITADEL_API_URL?.replace("https://", "").split(":")[0] || "";
-  const port = process.env.ZITADEL_API_URL?.includes(":") 
-    ? process.env.ZITADEL_API_URL?.split(":")[1] 
-    : "443";
-    
-  imageRemotePatterns.push({
-    protocol: "https",
-    hostname,
-    port: port || "443",
-    pathname: "/**",
-  });
-}
 
 const nextConfig = {
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
@@ -79,8 +66,13 @@ const nextConfig = {
     dynamicIO: true,
   },
   images: {
-    // unoptimized: true,
     remotePatterns: imageRemotePatterns,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    formats: ['image/webp'],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   async headers() {
     return [
