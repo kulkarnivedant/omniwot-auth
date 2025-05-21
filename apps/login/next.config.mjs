@@ -49,13 +49,24 @@ const imageRemotePatterns = [
     port: "",
     pathname: "/**",
   },
+  {
+    protocol: "https",
+    hostname: "dev.zitadel.golain.io",
+    port: "443",
+    pathname: "/**",
+  }
 ];
 
 if (process.env.ZITADEL_API_URL) {
+  const hostname = process.env.ZITADEL_API_URL?.replace("https://", "").split(":")[0] || "";
+  const port = process.env.ZITADEL_API_URL?.includes(":") 
+    ? process.env.ZITADEL_API_URL?.split(":")[1] 
+    : "443";
+    
   imageRemotePatterns.push({
     protocol: "https",
-    hostname: process.env.ZITADEL_API_URL?.replace("https://", "") || "",
-    port: "",
+    hostname,
+    port,
     pathname: "/**",
   });
 }
