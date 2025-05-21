@@ -66,7 +66,7 @@ if (process.env.ZITADEL_API_URL) {
   imageRemotePatterns.push({
     protocol: "https",
     hostname,
-    port,
+    port: port || "443",
     pathname: "/**",
   });
 }
