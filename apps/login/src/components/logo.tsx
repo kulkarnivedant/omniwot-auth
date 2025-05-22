@@ -1,39 +1,20 @@
 import Image from "next/image";
 
 type Props = {
-  darkSrc?: string;
-  lightSrc?: string;
   height?: number;
   width?: number;
 };
 
-export function Logo({ lightSrc, darkSrc, height = 40, width = 147.5 }: Props) {
+export function Logo({ height = 40, width = 147.5 }: Props) {
   return (
-    <>
-      {darkSrc && (
-        <div className="hidden dark:flex">
-          <Image
-            height={height}
-            width={width}
-            src={darkSrc}
-            alt="logo"
-            priority={true}
-            style={{ width: 'auto', height: 'auto' }}
-          />
-        </div>
-      )}
-      {lightSrc && (
-        <div className="flex dark:hidden">
-          <Image
-            height={height}
-            width={width}
-            priority={true}
-            src={lightSrc}
-            alt="logo"
-            style={{ width: 'auto', height: 'auto' }}
-          />
-        </div>
-      )}
-    </>
+    <div>
+      <Image
+        height={height}
+        width={width}
+        src="/svg/omniwot-branding.svg"
+        alt="logo"
+        priority={true}
+      />
+    </div>
   );
 }

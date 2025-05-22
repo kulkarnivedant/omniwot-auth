@@ -23,10 +23,8 @@ export function DynamicTheme({
             {branding && (
               <>
                 <Logo
-                  lightSrc={branding.lightTheme?.logoUrl}
-                  darkSrc={branding.darkTheme?.logoUrl}
-                  height={appName ? 100 : 150}
-                  width={appName ? 100 : 150}
+                  height={appName ? 50 : 110}
+                  width={appName ? 50 : 110}
                 />
 
                 {appName && <AppAvatar appName={appName} />}
